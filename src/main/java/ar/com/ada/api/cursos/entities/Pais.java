@@ -1,7 +1,8 @@
 package ar.com.ada.api.cursos.entities;
 
 public class Pais {
-    
+    //------------------Empieza enum----------------------------
+  
     public enum PaisEnum{
         ARGENTINA(32),
         VENEZUELA(840),
@@ -29,7 +30,8 @@ public class Pais {
         return status;
     }
 }
-
+//------------------Termina enum----------------------------
+  
 
 public enum TipoDocuEnum{
     DNI(1), PASAPORTE(2);
@@ -57,4 +59,9 @@ public static TipoDocuEnum parse(int id) {
     return status;
 }
 }
+
+
+
+
+
 }

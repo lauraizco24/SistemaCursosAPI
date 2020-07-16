@@ -45,6 +45,9 @@ public static TipoContenidoEnum parse(int id) {
     return status;
 }
 }
+//------------------Termina enum----------------------------   
+
+
 
 public Integer getContenidoId() {
     return contenidoId;
