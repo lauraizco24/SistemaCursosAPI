@@ -26,11 +26,12 @@ public class Curso {
     private List<Clase> clases;
     @ManyToMany(mappedBy = "cursos")
     private List<Categoria> categorias;
-    @OneToMany(mappedBy = "estudiante")
-    private Inscripcion inscripcion;
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL )
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Inscripcion> inscripciones;
 
     //Getters y Setters
-    
+
 
     public Integer getCursoId() {
         return cursoId;
@@ -80,16 +81,12 @@ public class Curso {
         this.categorias = categorias;
     }
 
-    public Inscripcion getInscripcion() {
-        return inscripcion;
+    public List<Inscripcion> getInscripciones() {
+        return inscripciones;
     }
 
-    public void setInscripcion(Inscripcion inscripcion) {
-        this.inscripcion = inscripcion;
+    public void setInscripciones(List<Inscripcion> inscripciones) {
+        this.inscripciones = inscripciones;
     }
-
-
-
-
-    
+  
 }

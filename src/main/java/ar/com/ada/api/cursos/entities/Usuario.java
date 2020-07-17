@@ -1,8 +1,12 @@
 package ar.com.ada.api.cursos.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "usuario")
@@ -25,8 +29,9 @@ public class Usuario {
     @OneToOne
     @JoinColumn(name = "docente_id", referencedColumnName = "docente_id")
     private Docente docente;
-    @OneToMany(mappedBy = "estudiante")
-    private Inscripcion inscripcion;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Inscripcion> inscripciones;
 
     //------------------Empieza enum----------------------------
   
@@ -122,13 +127,15 @@ public void setDocente(Docente docente) {
     this.docente = docente;
 }
 
-public Inscripcion getInscripcion() {
-    return inscripcion;
+public List<Inscripcion> getInscripciones() {
+    return inscripciones;
 }
 
-public void setInscripcion(Inscripcion inscripcion) {
-    this.inscripcion = inscripcion;
+public void setInscripciones(List<Inscripcion> inscripciones) {
+    this.inscripciones = inscripciones;
 }
+
+
   
 
 
