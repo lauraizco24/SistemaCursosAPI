@@ -16,12 +16,12 @@ public class Usuario {
     @Column(name = "usuario_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer usuarioId;
-    private String usuername;
+    private String username;
     private String password;
     private String email;
     @Column(name = "fecha_login")
     private Date fechaLogin;
-    @Column(name = "tipo_usuario_id")
+    @Column(name = "tipo_usuario")
     private TipoUsuarioEnum tipoUsuarioId;
     @OneToOne
     @JoinColumn(name = "estudiante_id", referencedColumnName = "estudiante_id")
@@ -71,12 +71,12 @@ public void setUsuarioId(Integer usuarioId) {
     this.usuarioId = usuarioId;
 }
 
-public String getUsuername() {
-    return usuername;
+public String getUsername() {
+    return username;
 }
 
-public void setUsuername(String usuername) {
-    this.usuername = usuername;
+public void setUsername(String username) {
+    this.username = username;
 }
 
 public String getPassword() {

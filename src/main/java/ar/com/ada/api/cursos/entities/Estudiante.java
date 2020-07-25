@@ -1,5 +1,6 @@
 package ar.com.ada.api.cursos.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -11,11 +12,13 @@ public class Estudiante extends Persona {
     @Id
     @Column(name = "estudiante_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer estudianteId;
+
+
     @ManyToMany
     @JoinTable(name = "estudiante_x_curso", joinColumns = @JoinColumn(name = "estudiante_id"), inverseJoinColumns = @JoinColumn(name = "curso_id"))
-    private List<Curso> cursosQueAsiste;
+    private List<Curso> cursosQueAsiste = new ArrayList<>();
+
     @OneToOne(mappedBy = "estudiante")
     private Usuario usuario;
 

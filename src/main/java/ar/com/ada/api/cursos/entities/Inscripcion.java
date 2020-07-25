@@ -18,7 +18,7 @@ public class Inscripcion {
     @ManyToOne
     @JoinColumn(name ="usuario_id", referencedColumnName = "usuario_id" )
     private Usuario usuario;
-    @Column(name="estado_incripcion_id")
+    @Column(name="estado_inscripcion_id")
     private EstadoInscripcionEnum estadoInscripcionId;
     
 //------------------Empieza enum----------------------------

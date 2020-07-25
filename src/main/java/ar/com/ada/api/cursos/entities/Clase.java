@@ -15,6 +15,7 @@ public class Clase {
     @Column(name="clase_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer claseId;
+    @Column(name="numero_clase")
     private Integer numero;
     @ManyToOne
     @JoinColumn(name = "curso_id", referencedColumnName = "curso_id")

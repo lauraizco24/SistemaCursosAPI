@@ -1,5 +1,6 @@
 package ar.com.ada.api.cursos.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,27 +12,42 @@ import ar.com.ada.api.cursos.repos.CategoriaRepository;
 
 @Service
 public class CategoriaService {
+    
     @Autowired
-    CategoriaRepository categoriaRepo;   
+    CategoriaRepository repoCategoria;
 
-    void crearCategoria(Categoria categoria){ 
-        categoriaRepo.save(categoria);
+    public void crearCategoria(Categoria categoria) {
+        repoCategoria.save(categoria);
     }
 
-	public Categoria crearCategoria(String nombre, String descripcion) {
+    public Categoria crearCategoria(String nombre, String descripcion) {
         Categoria categoria = new Categoria();
         categoria.setNombre(nombre);
         categoria.setDescripcion(descripcion);
-        categoriaRepo.save(categoria);
+        repoCategoria.save(categoria);
         return categoria;
     }
-    
-    public Categoria buscarPorId(Integer id){
-        Optional<Categoria> opCategoria = categoriaRepo.findById(id);
-        if(opCategoria.isPresent()){
-            return opCategoria;
-        }
-        return null;
+
+    public Categoria buscarPorId(Integer id) {
+        Optional<Categoria> opCategoria = repoCategoria.findById(id);
+
+        // Si tiene un valor de categoria en el elemento que trajo.
+        // Camion con heladera dentro. hasta que no abrimos la puerta no sabemos si la
+        // trajo.
+        if (opCategoria.isPresent())
+            return opCategoria.get();
+        else
+            return null;
 
     }
+    public Categoria modificarCategoria(Categoria categoria) {
+        return repoCategoria.save(categoria);
+    }
+
+    public List<Categoria> listarTodas() {
+        return repoCategoria.findAll();
+    }
+    
+
+
 }
