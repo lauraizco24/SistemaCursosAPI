@@ -8,18 +8,18 @@ public class Pais {
         VENEZUELA(840),
         ESTADOS_UNIDOS(862);
 
-        private final int value;
+        private final Integer value;
 
         // NOTE: Enum constructor tiene que estar en privado
-        private PaisEnum(int value) {
+        private PaisEnum(Integer value) {
             this.value = value;
 
     }
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public static PaisEnum parse(int id) {
+    public static PaisEnum parse(Integer id) {
         PaisEnum status = null; // Default
         for (PaisEnum item : PaisEnum.values()) {
             if (item.getValue() == id) {
@@ -37,18 +37,18 @@ public enum TipoDocuEnum{
     DNI(1), PASAPORTE(2);
 
 
-    private final int value;
+    private final Integer value;
 
     // NOTE: Enum constructor tiene que estar en privado
-    private TipoDocuEnum(int value) {
+    private TipoDocuEnum(Integer value) {
         this.value = value;
 
 }
-public int getValue() {
+public Integer getValue() {
     return value;
 }
 
-public static TipoDocuEnum parse(int id) {
+public static TipoDocuEnum parse(Integer id) {
     TipoDocuEnum status = null; // Default
     for (TipoDocuEnum item : TipoDocuEnum.values()) {
         if (item.getValue() == id) {

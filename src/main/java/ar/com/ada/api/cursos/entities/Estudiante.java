@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "estudiante")
 public class Estudiante extends Persona {
@@ -13,18 +15,15 @@ public class Estudiante extends Persona {
     @Column(name = "estudiante_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer estudianteId;
-
-
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "estudiante_x_curso", joinColumns = @JoinColumn(name = "estudiante_id"), inverseJoinColumns = @JoinColumn(name = "curso_id"))
     private List<Curso> cursosQueAsiste = new ArrayList<>();
-
-    @OneToOne(mappedBy = "estudiante")
+    @JsonIgnore
+    @OneToOne(mappedBy = "estudiante", cascade = CascadeType.ALL)
     private Usuario usuario;
 
-
-    //Getters y Setters
-    
+    // Getters y Setters
 
     public Integer getEstudianteId() {
         return estudianteId;
@@ -48,7 +47,7 @@ public class Estudiante extends Persona {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+        usuario.setEstudiante(this);
     }
-    
 
 }

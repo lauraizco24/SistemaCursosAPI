@@ -1,5 +1,6 @@
 package ar.com.ada.api.cursos.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,13 +17,15 @@ public class Usuario {
     @Column(name = "usuario_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer usuarioId;
+    @Column(name="nombre_completo")
+    private String nombreCompleto;
     private String username;
     private String password;
     private String email;
     @Column(name = "fecha_login")
     private Date fechaLogin;
     @Column(name = "tipo_usuario")
-    private TipoUsuarioEnum tipoUsuarioId;
+    private int tipoUsuarioId;
     @OneToOne
     @JoinColumn(name = "estudiante_id", referencedColumnName = "estudiante_id")
     private Estudiante estudiante;
@@ -31,29 +34,29 @@ public class Usuario {
     private Docente docente;
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Inscripcion> inscripciones;
+    private List<Inscripcion> inscripciones = new ArrayList<>();
 
     //------------------Empieza enum----------------------------
   
     public enum TipoUsuarioEnum {
         DOCENTE(1), ESTUDIANTE(2), STAFF(3);
 
-        private final int value;
+        private final Integer value;
 
         // NOTE: Enum constructor tiene que estar en privado
-        private TipoUsuarioEnum(int value) {
+        private TipoUsuarioEnum(Integer value) {
             this.value = value;
 
         }
 
-        public int getValue() {
+        public Integer getValue() {
             return value;
         }
 
-        public static TipoUsuarioEnum parse(int id) {
+        public static TipoUsuarioEnum parse(Integer id) {
             TipoUsuarioEnum status = null; // Default
             for (TipoUsuarioEnum item : TipoUsuarioEnum.values()) {
-                if (item.getValue() == id) {
+                if (item.getValue().equals(id)) {
                     status = item;
                     break;
                 }
@@ -104,11 +107,11 @@ public void setFechaLogin(Date fechaLogin) {
 }
 
 public TipoUsuarioEnum getTipoUsuarioId() {
-    return tipoUsuarioId;
+    return TipoUsuarioEnum.parse(this.tipoUsuarioId);
 }
 
 public void setTipoUsuarioId(TipoUsuarioEnum tipoUsuarioId) {
-    this.tipoUsuarioId = tipoUsuarioId;
+    this.tipoUsuarioId = tipoUsuarioId.getValue();
 }
 
 public Estudiante getEstudiante() {
@@ -136,7 +139,20 @@ public void setInscripciones(List<Inscripcion> inscripciones) {
 }
 
 
-  
+public Integer obtenerEntityId() {
+    // TODO, segun el tipo de usuario, devolver el docenteId o estudianteId o nada!
+
+    switch (this.getTipoUsuarioId()) {
+        case ESTUDIANTE:
+            return this.getEstudiante().getEstudianteId();
+        case DOCENTE:
+            return this.getDocente().getDocenteId();
+
+        default:
+            break;
+    }
+    return null;
+}
 
 
 

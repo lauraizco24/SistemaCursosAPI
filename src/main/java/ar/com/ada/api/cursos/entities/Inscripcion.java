@@ -19,7 +19,7 @@ public class Inscripcion {
     @JoinColumn(name ="usuario_id", referencedColumnName = "usuario_id" )
     private Usuario usuario;
     @Column(name="estado_inscripcion_id")
-    private EstadoInscripcionEnum estadoInscripcionId;
+    private int estadoInscripcionId;
     
 //------------------Empieza enum----------------------------
   
@@ -92,13 +92,13 @@ public class Inscripcion {
 	}
 
 
-	public EstadoInscripcionEnum getEstadoInscripcionId() {
+	public int getEstadoInscripcionId() {
 		return estadoInscripcionId;
 	}
 
 
 	public void setEstadoInscripcionId(EstadoInscripcionEnum estadoInscripcionId) {
-		this.estadoInscripcionId = estadoInscripcionId;
+		this.estadoInscripcionId = estadoInscripcionId.getValue();
 	}   
 
 
